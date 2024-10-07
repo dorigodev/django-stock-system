@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
     if h.strip()
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.stock',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.users.backends.EmailBackend',
 ]
 
 ROOT_URLCONF = 'setup.urls'
@@ -130,7 +137,7 @@ STATIC_ROOT = DATADIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = DATADIR / 'media'
 
-# Default primary key field type
+# Default primary key field typ
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
