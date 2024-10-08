@@ -20,8 +20,8 @@ class Product(models.Model):
         return self.disponibility
 
     def get_photo_url(self):
-        if self.product_photo:
-            return getattr(self.product_photo, 'url', none)
+        if self.productPhoto:
+            return getattr(self.productPhoto, 'url', None)
         return None
 
     def get_date_formated(self):
