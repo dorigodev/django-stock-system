@@ -16,6 +16,7 @@ COPY scripts /scripts
 
 # Entra na pasta setup no container
 WORKDIR /djangoapp
+RUN pip install -r requirements.txt
 
 # A porta 8000 estará disponível para conexões externas ao container
 # É a porta que vamos usar para o Django.
@@ -24,20 +25,20 @@ EXPOSE 8000
 # RUN executa comandos em um shell dentro do container para construir a imagem.
 # O resultado da execução do comando é armazenado no sistema de arquivos da
 # imagem como uma nova camada.
-# Agrupar os comandos em um único RUN pode reduzir a quantidade de camadas da
+# Agrupar os comandos em um único RUN pode reduzir a quantidade de camadas dad
 # imagem e torná-la mais eficiente.
-RUN python -m venv /venv && \
-  /venv/bin/pip install --upgrade pip && \
-  /venv/bin/pip install -r /djangoapp/requirements.txt && \
-  adduser --disabled-password --no-create-home duser && \
-  mkdir -p /data/web/static && \
-  mkdir -p /data/web/media && \
-  chown -R duser:duser /venv && \
-  chown -R duser:duser /data/web/static && \
-  chown -R duser:duser /data/web/media && \
-  chmod -R 755 /data/web/static && \
-  chmod -R 755 /data/web/media && \
-  chmod -R +x /scripts
+RUN python -m venv /venv
+RUN /venv/bin/pip install --upgrade pip
+RUN /venv/bin/pip install -r /djangoapp/requirements.txt
+RUN adduser --disabled-password --no-create-home duser
+RUN mkdir -p /data/web/static
+RUN mkdir -p /data/web/media
+RUN  chown -R duser:duser /venv
+RUN chown -R duser:duser /data/web/static
+RUN chown -R duser:duser /data/web/media
+RUN chmod -R 777 /data/web/static
+RUN chmod -R 777 /data/web/media
+RUN chmod -R +x /scripts
 
 
 # Adiciona a pasta scripts e venv/bin
