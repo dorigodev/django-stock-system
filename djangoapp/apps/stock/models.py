@@ -19,6 +19,12 @@ class Product(models.Model):
     def get_disponibility(self):
         return self.disponibility
 
+    def get_price(self):
+        return self.price
+
+    def get_quantity(self):
+        return self.quantity
+
     def get_photo_url(self):
         if self.productPhoto:
             return getattr(self.productPhoto, 'url', None)
