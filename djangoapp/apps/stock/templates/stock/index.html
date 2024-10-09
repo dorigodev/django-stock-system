@@ -29,27 +29,27 @@
         <div class="nav-right">
             <button><a href="{%url 'create_product'%}">Adicionar Produto</a></button>
             <button><a href="{%url 'logout' %}">Sair</a></button>
-            <form action="/search" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar produtos...">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </form>
+            <form action="{% url 'search_product'%}">
+                    <input type="search" name="search" placeholder="Pesquisar produtos...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
         </div>
     </nav>
-    {% block content%}
+    {% block content %}
     <main>
         <div class="section-stats">
             <!-- Card 1: Quantidade de variedade dos produtos -->
             <div class="stat-card">
                 <h3>Quantidade de Variedade dos Produtos</h3>
-                <p>7 Produtos</p>
+                <p>{{products_variety}} Produtos</p>
             </div>
             <div class="stat-card">
                 <h3>Valor Total dos Produtos</h3>
-                <p>R$ 59.930,00</p>
+                <p>R$ {{total_price}}</p>
             </div>
             <div class="stat-card">
                 <h3>Quantidade Total de Estoque</h3>
-                <p>299 produtos </p>
+                <p>{{quantity}} produtos </p>
             </div>
         </div>
         <section class="section-products">
@@ -68,8 +68,8 @@
                             <div class="part-1">
                                 <img src="{{product.get_photo_url}}" alt="{{product.productPhoto}}">
                                 <ul>
-                                    <li><a href=""><i class="fas fa-pen"></i></a></li>
-                                    <li><a href=""><i class="fas fa-trash"></i></a></li>
+                                    <li><a href="{% url 'update_product' product.id %}"><i class="fas fa-pen"></i></a></li>
+                                    <li><a href="{% url 'delete_product' product.id %}"><i class="fas fa-trash"></i></a></li>
                                 </ul>
                             </div>
                             <div class="part-2">
